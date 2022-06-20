@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State private var getNotification = false
+    
     @State private var beginning = defaultBeginningTime
     @State private var completion = defaultCompletionTime
     
@@ -48,11 +50,19 @@ struct ContentView: View {
                 Section(header: Text("Beginning intake time interval")) {
                    
                     DatePicker("Plese enter the time", selection: $beginning, displayedComponents: .hourAndMinute)
+                        .font(.headline)
                 }
                 
                 Section(header: Text("Completion intake time interval")) {
                    
                     DatePicker("Plese enter the time", selection: $completion, displayedComponents: .hourAndMinute)
+                        .font(.headline)
+                }
+                
+                Section(header: Text("Notification")) {
+                    Toggle("Send notification", isOn: $getNotification)
+                        .font(.headline)
+
                 }
                 
         }
