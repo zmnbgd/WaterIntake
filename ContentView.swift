@@ -9,7 +9,26 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @State private var beginning = defaultBeginningTime
+    @State private var completion = defaultCompletionTime
+    
     @State private var waterIntake = 2.0
+    
+    static var defaultBeginningTime: Date {
+        var beginningTimeComponents = DateComponents()
+        beginningTimeComponents.hour = 8
+        beginningTimeComponents.minute = 0
+        
+        return Calendar.current.date(from: beginningTimeComponents) ?? Date.now
+    }
+    
+    static var defaultCompletionTime: Date {
+        var completionTimeComponents = DateComponents()
+        completionTimeComponents.hour = 21
+        completionTimeComponents.minute = 0
+        
+        return Calendar.current.date(from: completionTimeComponents) ?? Date.now
+    }
     
     
     var body: some View {
@@ -25,7 +44,19 @@ struct ContentView: View {
                 } header: {
                     Text("Choose the amount of water you want to take during the day")
             }
+                
+                Section(header: Text("Beginning intake time interval")) {
+                   
+                    DatePicker("Plese enter the time", selection: $beginning, displayedComponents: .hourAndMinute)
+                }
+                
+                Section(header: Text("Completion intake time interval")) {
+                   
+                    DatePicker("Plese enter the time", selection: $completion, displayedComponents: .hourAndMinute)
+                }
+                
         }
+            .navigationTitle("Settings")
     }
 }
 
